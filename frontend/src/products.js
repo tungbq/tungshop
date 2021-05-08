@@ -1,6 +1,6 @@
 const products = [
     {
-        _id: 1,
+        _id: '1',
         name: 'A',
         image: '/images/airpods.jpg',
         description: 'Hehe',
@@ -12,7 +12,7 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: 2,
+        _id: '2',
         name: 'B',
         image: '/images/alexa.jpg',
         description: 'Hehe',
@@ -24,7 +24,7 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: 3,
+        _id: '3',
         name: 'C',
         image: '/images/camera.jpg',
         description: 'Hehe',
@@ -36,7 +36,7 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: 4,
+        _id: '4',
         name: 'D',
         image: '/images/mouse.jpg',
         description: 'Hehe',
@@ -48,7 +48,7 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: 5,
+        _id: '5',
         name: 'E',
         image: '/images/phone.jpg',
         description: 'Hehe',
@@ -60,14 +60,14 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: 6,
+        _id: '6',
         name: 'F',
         image: '/images/playstation.jpg',
         description: 'Hehe',
         brand: 'Apple',
         category: 'Electronics',
         prices: 8855,
-        countInStock: 3,
+        countInStock: 0,
         rating: 5,
         numReviews: 4,
     }
