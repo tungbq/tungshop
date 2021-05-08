@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/leojrbk/proshop-mern#readme",
   "dependencies": {
+    "color": "^3.1.3",
+    "colors": "^1.4.0",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.7"
