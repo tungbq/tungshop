@@ -1,6 +1,5 @@
 const products = [
     {
-        _id: '1',
         name: 'A',
         image: '/images/airpods.jpg',
         description: 'Hehe',
@@ -12,7 +11,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '2',
         name: 'B',
         image: '/images/alexa.jpg',
         description: 'Hehe',
@@ -24,7 +22,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '3',
         name: 'C',
         image: '/images/camera.jpg',
         description: 'Hehe',
@@ -36,7 +33,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '4',
         name: 'D',
         image: '/images/mouse.jpg',
         description: 'Hehe',
@@ -48,7 +44,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '5',
         name: 'E',
         image: '/images/phone.jpg',
         description: 'Hehe',
@@ -60,7 +55,6 @@ const products = [
         numReviews: 4,
     },
     {
-        _id: '6',
         name: 'F',
         image: '/images/playstation.jpg',
         description: 'Hehe',
