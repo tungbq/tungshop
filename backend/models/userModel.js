@@ -30,7 +30,6 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
 
 // Pre save is automatic detect, when we call User.create
 userSchema.pre('save', async function (next) {
-    console.log('Going to middle ware')
     // Do not genSalt when we just update email, or name
     if (!this.isModified('password'))
     {
