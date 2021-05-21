@@ -8,14 +8,22 @@ import Loader from '../components/Loader'
 
 import { listUsers } from '../actions/userActions'
 
-const UserListScreen = () => {
+const UserListScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const userList = useSelector(state => state.userList)
   const { loading, error, users } = userList
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
-    dispatch(listUsers())
+    // To fix security issue: Non-Admin user should not see the /admin/userList page
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers())
+    } else {
+      history.push('/login')
+    }
   }, [dispatch])
 
   const deleteHandler = (id) => {

@@ -14,7 +14,8 @@ import {
     USER_UPDATE_PROFILE_FAILED,
     USER_LIST_REQUEST,
     USER_LIST_SUCCESS,
-    USER_LIST_FAILED
+    USER_LIST_FAILED,
+    USER_LIST_RESET
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -79,6 +80,9 @@ export const userListReducer = (state = { users: [] }, action) => {
             return { loading: false, users: action.payload }
         case USER_LIST_FAILED:
             return { loading: false, error: action.payload }
+        // To fix security issue: Admin user logout, then they cannot see all user List
+        case USER_LIST_RESET:
+            return { users: [] }
         default:
             return state
     }
