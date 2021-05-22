@@ -7,8 +7,8 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 
-import { listProductDetails } from '../actions/productActions'
-// import { updateProduct } from '../../../backend/controllers/productController'
+import { listProductDetails, updateProduct } from '../actions/productActions'
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id
@@ -26,15 +26,18 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
 
-  // const productUpdate = useSelector(state => state.productUpdate)
-  // const {
-  //   loading: loadingUpdate,
-  //   error: errorUpdate,
-  //   success: successUpdate
-  // } = productUpdate
-
+  const productUpdate = useSelector(state => state.productUpdate)
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate
 
   useEffect(() => {
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET })
+      history.push('/admin/productList')
+    }
 
     if (!product || !product.name || product._id !== productId) {
       dispatch(listProductDetails(productId))
@@ -47,14 +50,20 @@ const ProductEditScreen = ({ match, history }) => {
       setCountInStock(product.countInStock)
       setDescription(product.description)
     }
-
-
-  }, [product, dispatch, productId, history])
+  }, [product, dispatch, productId, history, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    // UPDATE PRODUCT
-    // dispatch(updateProduct({ _id: productId, name, email, isAdmin }))
+    dispatch(updateProduct({
+      _id: productId,
+      name,
+      price,
+      brand,
+      category,
+      description,
+      image,
+      countInStock,
+    }))
   }
 
   return (
@@ -64,8 +73,8 @@ const ProductEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
         {loading ? <Loader />
           : error ? <Message variant='danger'>{error}</Message>

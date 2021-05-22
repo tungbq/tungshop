@@ -11,7 +11,7 @@ const getProducts = asyncHandler(async (req, res) => {
 })
 
 // @desc    Fetch single products
-// @route   GET /api/product/:id
+// @route   GET /api/products/:id
 // @access  Public
 const getProductById = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
@@ -26,7 +26,7 @@ const getProductById = asyncHandler(async (req, res) => {
 })
 
 // @desc    Delete product
-// @route   DELETE /api/product/:id
+// @route   DELETE /api/products/:id
 // @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
