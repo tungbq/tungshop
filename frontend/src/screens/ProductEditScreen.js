@@ -39,6 +39,8 @@ const ProductEditScreen = ({ match, history }) => {
       history.push('/admin/productList')
     }
 
+    // [BUG-NEED-FIX] Fix issue product details did not update when we reload??? BUG
+
     if (!product || !product.name || product._id !== productId) {
       dispatch(listProductDetails(productId))
     } else {
