@@ -1,0 +1,2 @@
+1. Unhandled Rejection (Error): Request failed with status code 500
+   When we choose a product, add to cart and then click 'Process to checkout'
