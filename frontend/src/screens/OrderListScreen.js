@@ -56,7 +56,7 @@ const OrderListScreen = ({ history }) => {
                       : ('Not paid yet')}
                     </td>
                     <td>{order.isDelivered
-                      ? <i color='red' className='fas fa-check' style={{ color: 'green' }}></i>
+                      ? order.deliveredAt
                       : <i color='red' className='fas fa-times' style={{ color: 'red' }}></i>}
                     </td>
                     <td>

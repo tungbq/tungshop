@@ -5,15 +5,26 @@ import { Link } from 'react-router-dom'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, deliverOrder } from '../actions/orderActions'
 
-const OrderScreen = ({ match }) => {
+import { ORDER_DELIVER_RESET } from '../constants/orderConstants'
+
+const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
 
   const dispatch = useDispatch()
 
   const orderDetails = useSelector(state => state.orderDetails)
   const { order, loading, error } = orderDetails
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+  const orderDeliver = useSelector(state => state.orderDeliver)
+  const {
+    loading: loadingDelever,
+    success: successDeliver,
+  } = orderDeliver
 
   // Calculate prices
   const addDecimals = (num) => {
@@ -26,8 +37,22 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId))
-  }, [dispatch, orderId])
+    if (!userInfo) {
+      history.push('/login')
+    }
+
+    // Temporary mark pay as success, will implement the paypal later
+    // successPay = true
+
+    if (!order || successDeliver) {
+      dispatch({ type: ORDER_DELIVER_RESET })
+      dispatch(getOrderDetails(orderId))
+    }
+  }, [dispatch, orderId, successDeliver])
+
+  const deliverHander = () => {
+    dispatch(deliverOrder(order))
+  }
 
   return loading ? <Loader /> : error ? <Message variant='danger'>
     {error}
@@ -115,9 +140,6 @@ const OrderScreen = ({ match }) => {
                       </ListGroup.Item>
                     ))
                   }
-
-
-
                 </ListGroup>
               )}
             </p>
@@ -164,6 +186,15 @@ const OrderScreen = ({ match }) => {
               {error && <Message variant='danger'>{error}</Message>}
             </ListGroup.Item>
 
+            {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && */}
+            {loadingDelever && <Loader />}
+            {userInfo && userInfo.isAdmin && !order.isDelivered &&
+              <ListGroup.Item>
+                <Button className='btn btn-block' onClick={deliverHander}>
+                  Mark As Delivered
+                </Button>
+              </ListGroup.Item>
+            }
           </ListGroup>
         </Card>
       </Col>
