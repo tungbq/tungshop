@@ -75,7 +75,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.delete(
+        await axios.delete(
             `/api/products/${id}`,
             config
         )
