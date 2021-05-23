@@ -4,3 +4,9 @@
 2. When we update the profile, the user name does not change on the Header (event we reload the page, it is still not update)
 
 3. Payment and Place Order Tabs did not show in bold font (seems it was disabled)
+
+4. Need to update the countInstock after an user order some products
+
+5. We need to save the image to DB, to avoid missing data after server reload
+
+6. Support video upload?
