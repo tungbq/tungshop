@@ -163,6 +163,12 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_SUCCESS,
             payload: data
         })
+
+        // Also update username in the header
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAILED,

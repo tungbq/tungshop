@@ -3,6 +3,7 @@
 -> Fixed
 
 2. When we update the profile, the user name does not change on the Header (event we reload the page, it is still not update)
+-> Fixed
 
 3. Payment and Place Order Tabs did not show in bold font (seems it was disabled)
 
