@@ -1,6 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import path from 'path'
+import sharp from 'sharp'
 
 const router = express.Router()
 
@@ -25,15 +26,41 @@ function checkFileType(file, cb) {
   }
 }
 
+// const upload = multer({
+//   storage,
+//   fileFilter: function (req, file, cb) {
+//     checkFileType(file, cb)
+//   }
+// })
+
+
 const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Please upload an image (ext: jpg, jpeg or png)!'))
+    }
+
+    cb(undefined, true)
   }
 })
 
-router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+router.post('/', upload.single('image'), async (req, res) => {
+  console.log('Testing...')
+  console.log('req.file')
+  console.log(req.file)
+
+  const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
+  // req.product.image = buffer
+  console.log('buffer...')
+  console.log(buffer)
+
+  res.json({ buffer })
 })
+// router.post('/', upload.single('image'), (req, res) => {
+//   res.send(`/${req.file.path}`)
+// })
 
 export default router
