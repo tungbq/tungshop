@@ -1,7 +1,8 @@
 import asyncHandler from 'express-async-handler'
 import products from '../data/products.js'
 import Product from '../models/productModel.js'
-
+import fs from 'fs'
+import path from 'path'
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -90,11 +91,18 @@ const updateProduct = asyncHandler(async (req, res) => {
         name,
         price,
         description,
-        image,
+        // image,
         brand,
         category,
         countInStock
     } = req.body
+
+    const __dirname = path.resolve()
+
+    const image = {
+        data: fs.readFileSync(path.join(__dirname + '/' + req.body.image)),
+        contentType: 'image/jpg'
+    }
 
     const product = await Product.findById(req.params.id)
 
