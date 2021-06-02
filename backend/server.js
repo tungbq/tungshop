@@ -12,6 +12,9 @@ import path from 'path'
 import products from './data/products.js'
 import { notFound, errorHandler } from './middleware/errorMiddleWare.js'
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 dotenv.config()
 
 connectDB()
@@ -43,6 +46,11 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(notFound)
 app.use(errorHandler)
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
+
 
 const PORT = process.env.PORT || 5000
 

@@ -71,7 +71,8 @@ const createProduct = asyncHandler(async (req, res) => {
         name: 'Sample Name',
         price: 0,
         user: req.user._id,
-        image: '/images/sample.jpg',
+        // image: req.product.image,
+        // image: '/images/sample.jpg',
         brand: 'Sample brand',
         category: 'Sample category',
         countInStock: 0,
@@ -87,6 +88,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
+    console.log(req.body)
     const {
         name,
         price,

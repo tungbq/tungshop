@@ -17,7 +17,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   const [price, setPrice] = useState(0)
   const [name, setName] = useState('')
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState()
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
@@ -74,7 +74,23 @@ const ProductEditScreen = ({ match, history }) => {
 
       const { data } = await axios.post('/api/upload', formData, config)
 
-      setImage(data)
+      console.log('Set image started')
+      console.log('data:')
+      console.log(data)
+
+      setImage(data.buffer.data)
+
+      console.log('data.buffer:')
+      console.log(data.buffer)
+
+      console.log('data.buffer data:')
+      console.log(data.buffer.data)
+
+      console.log('image:')
+      console.log(image)
+
+      console.log('Set image Done')
+
       setUploading(false)
     } catch (error) {
       console.error(error)
