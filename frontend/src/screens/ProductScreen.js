@@ -9,6 +9,8 @@ import Loader from '../components/Loader'
 import Meta from '../components/Meta'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
+import { loadImage } from '../utils/loadImage'
+
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
@@ -19,13 +21,6 @@ const ProductScreen = ({ history, match }) => {
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
 
-    const arrayBufferToBase64 = (buffer) => {
-        var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer)); bytes.forEach((b) => binary += String.fromCharCode(b)); return window.btoa(binary);
-    };
-
-    const base64Flag = 'data:image/jpeg;base64,';
-    const imageStr = arrayBufferToBase64(product.image.data.data);
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -73,7 +68,7 @@ const ProductScreen = ({ history, match }) => {
                             <Meta title={product.name} />
                             <Row>
                                 <Col md={6}>
-                                    <Image src={base64Flag + imageStr} alt={product.name} fluid />
+                                    <Image src={loadImage(product.image)} alt={product.name} fluid />
                                 </Col>
                                 <Col md={3}>
                                     <ListGroup variant='flush'>

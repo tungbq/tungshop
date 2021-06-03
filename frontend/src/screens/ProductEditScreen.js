@@ -74,22 +74,7 @@ const ProductEditScreen = ({ match, history }) => {
 
       const { data } = await axios.post('/api/upload', formData, config)
 
-      console.log('Set image started')
-      console.log('data:')
-      console.log(data)
-
-      setImage(data.buffer.data)
-
-      console.log('data.buffer:')
-      console.log(data.buffer)
-
-      console.log('data.buffer data:')
-      console.log(data.buffer.data)
-
-      console.log('image:')
-      console.log(image)
-
-      console.log('Set image Done')
+      setImage(data)
 
       setUploading(false)
     } catch (error) {
