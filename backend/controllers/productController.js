@@ -123,6 +123,9 @@ const updateProduct = asyncHandler(async (req, res) => {
 
     const updatedProduct = await product.save()
     res.json(updatedProduct)
+
+    // To remove upload files after insert to DB
+    fs.unlinkSync(path.join(__dirname + '/' + req.body.image))
 })
 
 // @desc    Create new review
