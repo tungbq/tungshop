@@ -87,7 +87,7 @@ const UserEditScreen = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId='isadmin'>
-                  <Form.Label>Email password</Form.Label>
+                  <Form.Label>Is Admin?</Form.Label>
                   <Form.Check
                     type='checkbox'
                     label='Is Admin'
