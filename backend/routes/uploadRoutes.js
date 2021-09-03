@@ -3,11 +3,18 @@ import multer from 'multer'
 import path from 'path'
 import sharp from 'sharp'
 
+import fs from 'fs'
+
 const router = express.Router()
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/')
+    const uploads_dir = 'uploads/';
+    if (!fs.existsSync(uploads_dir)){
+      console.log('uploads folder does not exist, creating ...')
+      fs.mkdirSync(uploads_dir);
+    }
+    cb(null, uploads_dir)
   },
   filename(req, file, cb) {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
@@ -34,7 +41,6 @@ const upload = multer({
 })
 
 router.post('/', upload.single('image'), (req, res) => {
-  console.log(req)
   res.send(`/${req.file.path}`)
 })
 
