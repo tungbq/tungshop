@@ -16,6 +16,8 @@ import {
   ORDER_DELIVER_SUCCESS
 } from '../constants/orderConstants'
 
+import { CART_RESET_ITEM } from '../constants/cartConstants'
+
 import axios from 'axios'
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -42,6 +44,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data
+    })
+
+    dispatch({
+      type: CART_RESET_ITEM
     })
   } catch (error) {
     dispatch({
