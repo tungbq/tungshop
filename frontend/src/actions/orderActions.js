@@ -46,9 +46,13 @@ export const createOrder = (order) => async (dispatch, getState) => {
       payload: data
     })
 
+    // Reset the cart items after placing an order successfully
     dispatch({
       type: CART_RESET_ITEM
     })
+    localStorage.removeItem('cartItems')
+    localStorage.removeItem('shippingAddress')
+
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAILED,
